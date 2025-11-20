@@ -1,3 +1,4 @@
+// Home: Main page with hero, tracking form, results section, and features
 import { useState } from "react";
 import HeroSection from "../components/HeroSection";
 import TrackingForm from "../components/TrackingForm";
@@ -35,7 +36,7 @@ function Home() {
   }
 
   return (
-    <div className="w-full">
+    <div className="w-full bg-white dark:bg-slate-900 min-h-screen">
       {/* Hero Section with Tracking Form */}
       <HeroSection>
         <TrackingForm

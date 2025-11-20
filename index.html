@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -7,14 +7,34 @@
     <title>TrackFlow • Shipment Tracking</title>
     <!-- Early theme boot: applies dark/light class before React mounts to avoid FOUC -->
     <script>
-      (function() {
+      (function () {
         try {
-          var storageTheme = localStorage.getItem('theme');
-          var systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-          var isDark = storageTheme ? storageTheme === 'dark' : systemPrefersDark;
+          var storageTheme = localStorage.getItem("theme");
+          var systemPrefersDark =
+            window.matchMedia &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches;
+          var isDark = storageTheme
+            ? storageTheme === "dark"
+            : systemPrefersDark;
           var root = document.documentElement;
-          if (isDark) root.classList.add('dark'); else root.classList.remove('dark');
-        } catch (e) {}
+          var body = document.body;
+
+          // Remove both classes first
+          root.classList.remove("light", "dark");
+
+          // Add the appropriate class
+          if (isDark) {
+            root.classList.add("dark");
+            root.style.backgroundColor = "#0f172a";
+            root.style.colorScheme = "dark";
+          } else {
+            root.classList.add("light");
+            root.style.backgroundColor = "#ffffff";
+            root.style.colorScheme = "light";
+          }
+        } catch (e) {
+          console.error("Theme initialization error:", e);
+        }
       })();
     </script>
   </head>

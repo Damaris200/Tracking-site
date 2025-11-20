@@ -1,28 +1,28 @@
 // Header: Sticky top navigation with brand, links, theme toggle, and mobile menu
 import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import Button from "./Button";
 import ThemeToggle from "./ThemeToggle";
 
 function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
-      setMobileMenuOpen(false);
-    } else if (sectionId === "home") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      setMobileMenuOpen(false);
-    }
+  const isActive = (path: string) => location.pathname === path;
+  
+  const getLinkClass = (path: string) => {
+    const baseClass = "text-sm font-medium transition-colors";
+    return isActive(path)
+      ? `${baseClass} text-blue-600 dark:text-blue-400`
+      : `${baseClass} text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white`;
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 dark:border-slate-700 dark:bg-slate-900/95 dark:supports-[backdrop-filter]:bg-slate-900/80">
+    <header className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/95 backdrop-blur supports-backdrop-filter:bg-white/80 dark:border-slate-700 dark:bg-slate-900/95 dark:supports-backdrop-filter:bg-slate-900/80">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo - Clean and minimal */}
-        <button
-          onClick={() => scrollToSection("home")}
+        <Link
+          to="/"
           className="flex items-center gap-3 transition-opacity hover:opacity-80"
         >
           <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-600 dark:bg-blue-500">
@@ -41,49 +41,45 @@ function Header() {
             </svg>
           </div>
           <span className="text-lg font-semibold text-gray-900 dark:text-white">
-            TrackFlow
+            TrackIt
           </span>
-        </button>
+        </Link>
 
         {/* Navigation - Professional spacing */}
         <nav className="hidden items-center gap-8 md:flex" role="navigation" aria-label="Primary">
-          <button
-            onClick={() => scrollToSection("home")}
-            className="text-sm font-medium text-gray-700 transition-colors hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+          <Link
+            to="/"
+            className={getLinkClass("/")}
             aria-label="Go to Home"
           >
             Home
-          </button>
-          <button
-            onClick={() => scrollToSection("features")}
-            className="text-sm font-medium text-gray-700 transition-colors hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
-            aria-label="View Features"
+          </Link>
+          <Link
+            to="/track"
+            className={getLinkClass("/track")}
+            aria-label="Track Shipment"
           >
-            Features
-          </button>
-          <button
-            onClick={() => scrollToSection("tracking")}
-            className="text-sm font-medium text-gray-700 transition-colors hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
-            aria-label="Open Tracking"
+            Track
+          </Link>
+          <Link
+            to="/about"
+            className={getLinkClass("/about")}
+            aria-label="About Us"
           >
-            Track Shipment
-          </button>
-          <button
-            onClick={() => scrollToSection("metrics")}
-            className="text-sm font-medium text-gray-700 transition-colors hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
-            aria-label="View Analytics"
+            About
+          </Link>
+          <Link
+            to="/contact"
+            className={getLinkClass("/contact")}
+            aria-label="Contact Us"
           >
-            Analytics
-          </button>
+            Contact
+          </Link>
         </nav>
 
         {/* Actions - Clean alignment */}
         <div className="flex items-center gap-3">
           <ThemeToggle />
-          <Button variant="ghost" size="sm" className="hidden sm:inline-flex">
-            Sign in
-          </Button>
-          <Button size="sm" className="hidden md:inline-flex">Get started</Button>
           
           {/* Mobile menu button */}
           <button
@@ -110,30 +106,34 @@ function Header() {
       {mobileMenuOpen && (
         <div className="border-t border-gray-200 bg-white dark:border-slate-700 dark:bg-slate-900 md:hidden" id="mobile-nav">
           <nav className="mx-auto max-w-7xl space-y-1 px-4 py-4 sm:px-6 lg:px-8" role="navigation" aria-label="Mobile">
-            <button
-              onClick={() => scrollToSection("home")}
-              className="block w-full rounded-lg px-3 py-2 text-left text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-slate-800"
+            <Link
+              to="/"
+              onClick={() => setMobileMenuOpen(false)}
+              className={`block w-full rounded-lg px-3 py-2 text-left ${getLinkClass("/")}`}
             >
               Home
-            </button>
-            <button
-              onClick={() => scrollToSection("features")}
-              className="block w-full rounded-lg px-3 py-2 text-left text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-slate-800"
+            </Link>
+            <Link
+              to="/track"
+              onClick={() => setMobileMenuOpen(false)}
+              className={`block w-full rounded-lg px-3 py-2 text-left ${getLinkClass("/track")}`}
             >
-              Features
-            </button>
-            <button
-              onClick={() => scrollToSection("tracking")}
-              className="block w-full rounded-lg px-3 py-2 text-left text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-slate-800"
+              Track
+            </Link>
+            <Link
+              to="/about"
+              onClick={() => setMobileMenuOpen(false)}
+              className={`block w-full rounded-lg px-3 py-2 text-left ${getLinkClass("/about")}`}
             >
-              Track Shipment
-            </button>
-            <button
-              onClick={() => scrollToSection("metrics")}
-              className="block w-full rounded-lg px-3 py-2 text-left text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-slate-800"
+              About
+            </Link>
+            <Link
+              to="/contact"
+              onClick={() => setMobileMenuOpen(false)}
+              className={`block w-full rounded-lg px-3 py-2 text-left ${getLinkClass("/contact")}`}
             >
-              Analytics
-            </button>
+              Contact
+            </Link>
             <div className="border-t border-gray-200 pt-3 dark:border-slate-700">
               <Button variant="ghost" size="sm" className="mb-2 w-full justify-center">
                 Sign in

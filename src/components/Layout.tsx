@@ -1,15 +1,15 @@
+// Layout: Page scaffold with header, main content, and footer
+import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 
-interface LayoutProps {
-  children: React.ReactNode;
-}
-
-function Layout({ children }: LayoutProps) {
+function Layout() {
   return (
-    <div className="min-h-screen w-full bg-white text-gray-900 transition-colors duration-300 dark:bg-slate-900 dark:text-white">
+    <div className="min-h-screen w-full bg-white dark:bg-slate-900 text-gray-900 dark:text-white transition-colors duration-300">
       <Header />
-      <main className="w-full">{children}</main>
+      <main className="w-full bg-white dark:bg-slate-900">
+        <Outlet />
+      </main>
       <Footer />
     </div>
   );

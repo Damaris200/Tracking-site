@@ -161,7 +161,7 @@ function TrackingCard({ result }: TrackingCardProps) {
             <div className="h-2 overflow-hidden rounded-full bg-gray-200 dark:bg-slate-700">
               <div
                 className="h-full rounded-full bg-blue-600 transition-all duration-500 dark:bg-blue-500"
-                style={{ width: `${progress}%` }}
+                style={{ width: `${progress}%` } as React.CSSProperties}
               />
             </div>
           </div>

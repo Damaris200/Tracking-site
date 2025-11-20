@@ -1,3 +1,4 @@
+// TrackingCard: Modern card for shipment details, progress, and timeline
 import type { TrackingData } from "../data/mockTrackingData";
 
 interface TrackingCardProps {
@@ -85,7 +86,7 @@ function TrackingCard({ result }: TrackingCardProps) {
       {/* Main card with improved styling */}
       <div className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xl shadow-slate-200/50 transition-all duration-300 hover:shadow-2xl hover:shadow-slate-300/60 dark:border-slate-800/50 dark:bg-slate-900/60 dark:shadow-slate-950/50 dark:backdrop-blur-xl dark:hover:border-slate-700/50">
         {/* Header with gradient */}
-        <div className="border-b border-slate-200 bg-gradient-to-r from-slate-50 via-white to-slate-50 px-6 py-5 dark:border-slate-800/50 dark:from-slate-900/80 dark:via-slate-900/60 dark:to-slate-900/80">
+        <div className="border-b border-slate-200 bg-linear-to-r from-slate-50 via-white to-slate-50 px-6 py-5 dark:border-slate-800/50 dark:from-slate-900/80 dark:via-slate-900/60 dark:to-slate-900/80">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
               <p className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
@@ -160,10 +161,10 @@ function TrackingCard({ result }: TrackingCardProps) {
             </div>
             <div className="relative h-3 overflow-hidden rounded-full bg-slate-200 shadow-inner dark:bg-slate-800">
               <div
-                className="absolute h-full rounded-full bg-gradient-to-r from-blue-500 via-blue-600 to-blue-500 shadow-lg shadow-blue-500/30 transition-all duration-700 ease-out dark:shadow-blue-500/20"
+                className="absolute h-full rounded-full bg-linear-to-r from-blue-500 via-blue-600 to-blue-500 shadow-lg shadow-blue-500/30 transition-all duration-700 ease-out dark:shadow-blue-500/20"
                 style={{ width: `${progress}%` }}
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse" />
+                <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent animate-pulse" />
               </div>
             </div>
           </div>
@@ -183,11 +184,11 @@ function TrackingCard({ result }: TrackingCardProps) {
             <div key={index} className="group/timeline relative flex gap-5">
               {/* Timeline line with gradient */}
               {index !== timeline.length - 1 && (
-                <div className="absolute left-2.5 top-10 h-full w-0.5 bg-gradient-to-b from-slate-300 to-slate-200 dark:from-slate-700 dark:to-slate-800" />
+                <div className="absolute left-2.5 top-10 h-full w-0.5 bg-linear-to-b from-slate-300 to-slate-200 dark:from-slate-700 dark:to-slate-800" />
               )}
               
               {/* Enhanced dot with pulse animation for latest event */}
-              <div className={`relative z-10 mt-1.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full transition-all duration-300 ${
+              <div className={`relative z-10 mt-1.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full transition-all duration-300 ${
                 index === 0 
                   ? "bg-blue-500 shadow-lg shadow-blue-500/50 ring-4 ring-blue-100 dark:ring-blue-500/20 dark:shadow-blue-500/30" 
                   : "bg-slate-300 ring-2 ring-slate-100 group-hover/timeline:bg-slate-400 dark:bg-slate-700 dark:ring-slate-800 dark:group-hover/timeline:bg-slate-600"
@@ -214,7 +215,7 @@ function TrackingCard({ result }: TrackingCardProps) {
 
       {/* Info note with improved styling */}
       <div className="flex gap-3 rounded-xl border border-blue-200 bg-blue-50 p-4 dark:border-blue-500/20 dark:bg-blue-500/5">
-        <svg className="mt-0.5 h-5 w-5 flex-shrink-0 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <svg className="mt-0.5 h-5 w-5 shrink-0 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
         <p className="text-xs leading-relaxed text-blue-900 dark:text-blue-200">

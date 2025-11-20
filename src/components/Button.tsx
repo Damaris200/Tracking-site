@@ -1,3 +1,4 @@
+// Button: Reusable button component with variants and sizes
 import React from "react";
 
 const variants = {
